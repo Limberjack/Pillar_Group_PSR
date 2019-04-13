@@ -24,7 +24,6 @@ public class AppMain {
                 new ConfigRepositoryJdbcImpl(conn);
 
         /*
-
         // findAll
         System.out.println("Users:");
         System.out.println(usersRepository.findAll());
