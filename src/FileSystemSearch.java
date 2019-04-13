@@ -3,10 +3,21 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class FileSystemSearch {
+    /**
+     * инициализируем поиск по всей файловой системе
+     * @param supportedProgList список поддерживаемых программ
+     */
     public static void initiateSearch(SupportedProgList supportedProgList){
         initializeSearch(supportedProgList);
     }
 
+    /**
+     * начинаем сам поиск, запуская рекурсивный обход по файлам из корневого каталога
+     *
+     * беда. он идет только из С диска. ни о каких других дисках он не подозревает
+     *
+     * @param supportedProgList
+     */
     private static void initializeSearch(SupportedProgList supportedProgList){
         Scanner fileRead = new Scanner("SupportedPrograms");
         while(fileRead.hasNext())
@@ -14,10 +25,16 @@ public class FileSystemSearch {
         searchUtil(new File("/"));
     }
 
-    private static void searchUtil(File directory ){
-        /**  Prog prog = supportedProgList.getProg(directory.getName());
+    /**
+     * если в процессе обхода мы встречаем папку с именем, как поддерживаемая программа, то запускаем еще один поток,
+     * задача которого убедиться в том, что мы нашли именно программу, а не просто папку с таким же названием
+     *
+     * @param directory
+     */
+    private static void searchUtil(File directory, SupportedProgList supportedProgList, LinkedList pathList ){
+        Prog prog = supportedProgList.getProg(directory.getName());
          if(prog != null)
-         prog.getInsideSearch().start();*/
+         prog.getInsideSearch(pathList).start();
 
         System.out.println(directory.getAbsolutePath());
         //System.out.println(directory.getName());

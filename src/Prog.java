@@ -2,15 +2,23 @@ import insideSerach.InsideSearch;
 
 public class Prog{
     private String Name;
-    //private String Path;
+    private Class insideSearchType;
+    private String path;
     private InsideSearch insideSearch;
-    public  Prog(String name/*, String path, InsideSearch currentSearch*/){
+
+    /**
+     *
+     * @param name имя программы
+     * @param path путь до директории с программой
+     * @param currentSearch тип поиска, который нужно применять для данной программы
+     */
+    public  Prog(String name, String path, InsideSearch currentSearch){
         Name = name;
-        //Path = path;
-        //insideSearch = currentSearch;
+        this.path = path;
+        insideSearch = currentSearch;
     }
 
-    public InsideSearch getInsideSearch() {
+    public InsideSearch getInsideSearch(String path) {
         return insideSearch;
     }
 
