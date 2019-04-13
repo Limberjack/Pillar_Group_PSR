@@ -1,4 +1,4 @@
-package modelsDB;
+package database.modelsDB;
 
 public class ConfigFileDB {
     private String name;

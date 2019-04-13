@@ -1,4 +1,4 @@
-package modelsDB;
+package database.modelsDB;
 
 public class ProgramDB {
     private String name;
