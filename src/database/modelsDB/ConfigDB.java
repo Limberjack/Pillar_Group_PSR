@@ -1,12 +1,20 @@
 package database.modelsDB;
 
-import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * General config
+ */
 public class ConfigDB {
-    private String name;
-    private List<ConfigFileDB> ConfigFiles = new ArrayList<>();
 
+    private String name;
+    private List<ConfigFileDB> ConfigFiles;
+
+    /**
+     *
+     * @param name config's name
+     * @param configFiles list of all files which are contained to this config
+     */
     public ConfigDB(String name, List<ConfigFileDB> configFiles) {
         this.name = name;
         ConfigFiles = configFiles;

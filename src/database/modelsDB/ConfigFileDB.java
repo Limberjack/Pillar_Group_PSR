@@ -1,10 +1,19 @@
 package database.modelsDB;
 
+/**
+ * File to save
+ */
 public class ConfigFileDB {
     private String name;
     private String pathProgram;
     private String pathBackup;
 
+    /**
+     *
+     * @param name name of the file with file extension
+     * @param pathProgram path where this file is located for program
+     * @param pathBackup path where this file is copied to the backup
+     */
     public ConfigFileDB(String name, String pathProgram, String pathBackup) {
         this.name = name;
         this.pathProgram = pathProgram;

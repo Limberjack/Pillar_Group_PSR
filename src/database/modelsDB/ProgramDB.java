@@ -1,9 +1,17 @@
 package database.modelsDB;
 
+/**
+ * Description of the program
+ */
 public class ProgramDB {
     private String name;
     private String version;
 
+    /**
+     *
+     * @param name program's name
+     * @param version program's version
+     */
     public ProgramDB(String name, String version) {
         this.name = name;
         this.version = version;
