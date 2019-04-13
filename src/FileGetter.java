@@ -24,5 +24,3 @@ public class FileGetter {
 
 }
 
-
-//TODO add class to making inside program search
