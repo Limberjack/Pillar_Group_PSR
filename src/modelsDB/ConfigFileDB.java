@@ -1,3 +1,5 @@
+package modelsDB;
+
 public class ConfigFileDB {
     private String name;
     private String path;

@@ -1,3 +1,5 @@
+package modelsDB;
+
 public class ProgramDB {
     private String name;
     private String version;
