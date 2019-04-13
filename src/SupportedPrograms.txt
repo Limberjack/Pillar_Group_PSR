@@ -1,0 +1,2 @@
+telegram-desktop
+intellij-idea-community
