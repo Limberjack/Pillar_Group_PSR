@@ -3,7 +3,7 @@ package database.modelsDB;
 import database.DBConfigFileable;
 
 /**
- * File to save
+ * File of the config to save
  */
 public class ConfigFileDB implements DBConfigFileable {
     private String name;
