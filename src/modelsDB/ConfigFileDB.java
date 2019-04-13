@@ -2,26 +2,37 @@ package modelsDB;
 
 public class ConfigFileDB {
     private String name;
-    private String path;
+    private String pathProgram;
+    private String pathBackup;
 
-    public ConfigFileDB(String name, String path) {
+    public ConfigFileDB(String name, String pathProgram, String pathBackup) {
         this.name = name;
-        this.path = path;
+        this.pathProgram = pathProgram;
+        this.pathBackup = pathBackup;
     }
+
 
     public String getName() {
         return name;
     }
 
-    public String getPath() {
-        return path;
+    public String getPathProgram() {
+        return pathProgram;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void setPathProgram(String pathProgram) {
+        this.pathProgram = pathProgram;
+    }
+
+    public String getPathBackup() {
+        return pathBackup;
+    }
+
+    public void setPathBackup(String pathBackup) {
+        this.pathBackup = pathBackup;
     }
 }
