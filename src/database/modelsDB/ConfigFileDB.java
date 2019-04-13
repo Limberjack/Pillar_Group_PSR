@@ -21,26 +21,14 @@ public class ConfigFileDB implements DBConfigFileable {
         this.pathBackup = pathBackup;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPathProgram(String pathProgram) {
-        this.pathProgram = pathProgram;
-    }
-
-    public void setPathBackup(String pathBackup) {
-        this.pathBackup = pathBackup;
-    }
-
     @Override
     public String getFileName() {
-        return pathProgram;
+        return name;
     }
 
     @Override
     public String getFilePathProgram() {
-        return null;
+        return pathProgram;
     }
 
     @Override

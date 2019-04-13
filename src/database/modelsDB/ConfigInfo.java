@@ -1,47 +1,31 @@
 package database.modelsDB;
 
 public class ConfigInfo {
-    private String programName;
+    private String configName;
     private String fileName;
     private String pathProgram;
     private String pathBackup;
 
-    public ConfigInfo(String programName, String fileName, String pathProgram, String pathBackup) {
-        this.programName = programName;
+    public ConfigInfo(String configName, String fileName, String pathProgram, String pathBackup) {
+        this.configName = configName;
         this.fileName = fileName;
         this.pathProgram = pathProgram;
         this.pathBackup = pathBackup;
     }
 
-    public String getProgramName() {
-        return programName;
-    }
-
-    public void setProgramName(String programName) {
-        this.programName = programName;
+    public String getConfigName() {
+        return configName;
     }
 
     public String getFileName() {
         return fileName;
     }
 
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
     public String getPathProgram() {
         return pathProgram;
     }
 
-    public void setPathProgram(String pathProgram) {
-        this.pathProgram = pathProgram;
-    }
-
     public String getPathBackup() {
         return pathBackup;
-    }
-
-    public void setPathBackup(String pathBackup) {
-        this.pathBackup = pathBackup;
     }
 }
