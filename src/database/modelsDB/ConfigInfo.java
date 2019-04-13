@@ -1,7 +1,5 @@
 package database.modelsDB;
 
-import java.util.List;
-
 public class ConfigInfo {
     private String programName;
     private String fileName;

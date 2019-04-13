@@ -25,7 +25,7 @@ public class ConfigRepositoryJdbcImpl implements ConfigRepository{
             );
 
     @Override
-    public boolean save(DBProgramable dbProgramable, DBConfigable dbConfigable) {
+    public void save(DBProgramable dbProgramable, DBConfigable dbConfigable) {
         // The SQL Query
         String sqlQuery = "";
 
@@ -35,8 +35,6 @@ public class ConfigRepositoryJdbcImpl implements ConfigRepository{
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
-
-        return true;
     }
 
     @Override
