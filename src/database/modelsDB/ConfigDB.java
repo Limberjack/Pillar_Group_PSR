@@ -1,38 +1,34 @@
 package database.modelsDB;
 
+import database.DBConfigFileable;
+import database.DBConfigable;
+
 import java.util.List;
 
 /**
  * General config
  */
-public class ConfigDB {
+public class ConfigDB implements DBConfigable {
 
     private String name;
-    private List<ConfigFileDB> ConfigFiles;
+    private List<DBConfigFileable> ConfigFiles;
 
     /**
-     *
-     * @param name config's name
+     * @param name        config's name
      * @param configFiles list of all files which are contained to this config
      */
-    public ConfigDB(String name, List<ConfigFileDB> configFiles) {
+    public ConfigDB(String name, List<DBConfigFileable> configFiles) {
         this.name = name;
         ConfigFiles = configFiles;
     }
 
-    public String getName() {
+    @Override
+    public String getConfigName() {
         return name;
     }
 
-    public List<ConfigFileDB> getConfigFiles() {
+    @Override
+    public List<DBConfigFileable> getConfigFiles() {
         return ConfigFiles;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setConfigFiles(List<ConfigFileDB> configFiles) {
-        ConfigFiles = configFiles;
     }
 }
