@@ -19,4 +19,12 @@ public class ConfigDB {
     public List<ConfigFileDB> getConfigFiles() {
         return ConfigFiles;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setConfigFiles(List<ConfigFileDB> configFiles) {
+        ConfigFiles = configFiles;
+    }
 }
