@@ -65,7 +65,7 @@ public class ConfigRepositoryJdbcImpl implements ConfigRepository {
         }
     }
 
-    private List<DBConfigable> convertConfigToInterface(Stack<ConfigInfo> configInfos){
+    private List<DBConfigable> convertConfigToInterface(Stack<ConfigInfo> configInfos) {
         Map<String, List<ConfigFileDB>> configsMap = new HashMap<>();
 
         while (!configInfos.isEmpty()) {
@@ -87,7 +87,7 @@ public class ConfigRepositoryJdbcImpl implements ConfigRepository {
             }
 
             List<DBConfigFileable> configFilesI = new ArrayList<>();
-            while (!configFiles.isEmpty()){
+            while (!configFiles.isEmpty()) {
                 configFilesI.add(configFiles.pop());
             }
 
@@ -96,7 +96,7 @@ public class ConfigRepositoryJdbcImpl implements ConfigRepository {
 
         List<DBConfigable> listToReturn = new ArrayList<>();
 
-        while (!configsStack.isEmpty()){
+        while (!configsStack.isEmpty()) {
             listToReturn.add(configsStack.pop());
         }
         return listToReturn;
