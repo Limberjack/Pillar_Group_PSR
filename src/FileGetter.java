@@ -1,7 +1,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
-public class FileGetter {
+public class FileGetter extends  Thread{
     /**
      * 1)создаем список поддерживаемых программ
      * 2)запускаем полный обход по файловой системе в поисках этих программ
@@ -11,13 +12,23 @@ public class FileGetter {
      * 6)завершаемся, подчищая за собой
      *
      *
-     * @param args
+     * @param
      * @throws FileNotFoundException
      */
-    public static void main(String[] args) throws FileNotFoundException {
-        SupportedProgList supportedProgList = DependMaker.buildDependence(new File("SupportedPrograms.txt"));
+    public static void main(String []arg) {
+        SupportedProgList supportedProgList = null;
+        try {
+            supportedProgList = DependMaker.buildDependence(new File("./SupportedPrograms.txt"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("Ебаный рот этого казино");
+        }
 
-        FileSystemSearch.initiateSearch(supportedProgList);
+        try {
+            FileSystemSearch.initiateSearch(supportedProgList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
     }

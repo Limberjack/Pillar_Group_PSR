@@ -1,4 +1,6 @@
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -7,22 +9,38 @@ public class FileSystemSearch {
      * инициализируем поиск по всей файловой системе
      * @param supportedProgList список поддерживаемых программ
      */
-    public static void initiateSearch(SupportedProgList supportedProgList){
-        initializeSearch(supportedProgList);
+    public static File initiateSearch(SupportedProgList supportedProgList) throws IOException {
+        LinkedList<String> pathlist = new LinkedList<>();
+        initializeSearch(supportedProgList, pathlist);
+        File paths = new File("./support");
+        paths.mkdir();
+        paths = new File("./support/paths.txt");
+        paths.createNewFile();
+        FileWriter writer = new FileWriter(paths);
+        for (int i = 0; i < pathlist.size(); i++) {
+            writer.write(pathlist.get(i) + "\n");
+        }
+        writer.close();
+        return paths;
     }
 
     /**
-     * начинаем сам поиск, запуская рекурсивный обход по файлам из корневого каталога
+     * начинаем сам поиск, запуская рекурсивный обход по файлам в каждом из корневых каталогов
      *
-     * беда. он идет только из С диска. ни о каких других дисках он не подозревает
+     * TODO узнать, можно ли как-то обходить каталоги с дровами, не зная их имен
      *
      * @param supportedProgList
      */
-    private static void initializeSearch(SupportedProgList supportedProgList){
+    private static void initializeSearch(SupportedProgList supportedProgList, LinkedList pathList){
         Scanner fileRead = new Scanner("SupportedPrograms");
+        File[] roots = File.listRoots();
+
         while(fileRead.hasNext())
-            supportedProgList.add(new Prog(fileRead.nextLine()));
-        searchUtil(new File("/"));
+           supportedProgList.add(new Prog(fileRead.nextLine()));
+        for (int i = 0; i < roots.length; i++) {
+            searchUtil(roots[i], supportedProgList, pathList);
+        }
+
     }
 
     /**
@@ -33,20 +51,17 @@ public class FileSystemSearch {
      */
     private static void searchUtil(File directory, SupportedProgList supportedProgList, LinkedList pathList ){
         Prog prog = supportedProgList.getProg(directory.getName());
-         if(prog != null)
-         prog.getInsideSearch(pathList).start();
-
-        System.out.println(directory.getAbsolutePath());
-        //System.out.println(directory.getName());
+        if(prog != null)
+            prog.getInsideSearch(pathList, directory).start();
 
         if(directory.canRead()) {
             File[] allFilesIn = directory.listFiles();
             for (int i = 0; i < allFilesIn.length; i++) {
                 if (allFilesIn[i].isDirectory() &&
                         !(allFilesIn[i].getAbsolutePath().equals("/proc") ||
-                                allFilesIn[i].getAbsolutePath().equals("/sys"))
+                                allFilesIn[i].getAbsolutePath().equals("/sys")) //TODO убери костыль
                 )
-                    searchUtil(allFilesIn[i]);
+                    searchUtil(allFilesIn[i], supportedProgList, pathList);
             }
         }
     }
