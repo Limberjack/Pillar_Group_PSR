@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,6 +15,7 @@ public class MainPage extends Application {
         primaryStage.setResizable(false);
         primaryStage.setIconified(true);
         primaryStage.setScene(new Scene(root, 400, 200));
+        Platform.setImplicitExit(true);
         primaryStage.show();
     }
 
