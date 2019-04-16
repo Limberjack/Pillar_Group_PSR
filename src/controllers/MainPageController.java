@@ -36,6 +36,7 @@ public class MainPageController implements IMainPageController{
         Parent root = FXMLLoader.load(getClass().getResource(References.SETTINGS_PAGE_FXML_PATH));
         Scene scene = new Scene(root);
         Stage stage = new Stage(StageStyle.DECORATED);
+        stage.setTitle("Настройки");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
