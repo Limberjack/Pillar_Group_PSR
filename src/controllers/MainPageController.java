@@ -37,6 +37,7 @@ public class MainPageController implements IMainPageController{
         Scene scene = new Scene(root);
         Stage stage = new Stage(StageStyle.DECORATED);
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 
@@ -51,6 +52,7 @@ public class MainPageController implements IMainPageController{
             stage.setResizable(false);
             stage.setTitle("Ошибка!");
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.show();
         } else {
             root = FXMLLoader.load(getClass().getResource(References.RESET_PAGE_FXML_PATH));
@@ -59,6 +61,7 @@ public class MainPageController implements IMainPageController{
             stage.setTitle("Восстановить");
             stage.setScene(scene);
             stage.show();
+            stage.setResizable(false);
         }
     }
 
