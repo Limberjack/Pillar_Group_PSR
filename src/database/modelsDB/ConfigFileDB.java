@@ -1,11 +1,11 @@
 package database.modelsDB;
 
-import database.DBConfigFileable;
+import database.IConfigFileDB;
 
 /**
  * File of the config to save
  */
-public class ConfigFileDB implements DBConfigFileable {
+public class ConfigFileDB implements IConfigFileDB {
     private String name;
     private String pathProgram;
     private String pathBackup;

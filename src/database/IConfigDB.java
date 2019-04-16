@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Use this interface for the general config
  */
-public interface DBConfigable {
+public interface IConfigDB {
     String getConfigName();
-    List<DBConfigFileable> getConfigFiles();
+    List<IConfigFileDB> getConfigFiles();
 }
