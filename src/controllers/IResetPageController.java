@@ -3,12 +3,13 @@ package controllers;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
-public interface ISettingsPageController extends Initializable {
+public interface IResetPageController extends Initializable {
 
     @FXML
     void selectAll();
 
     @FXML
-    void saveSettings();
+    void reset();
+
 
 }

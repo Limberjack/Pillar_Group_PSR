@@ -21,7 +21,7 @@ public class SettingsPageController implements ISettingsPageController{
     }
 
     @Override
-    public void save() {
+    public void saveSettings() {
 
     }
 }
