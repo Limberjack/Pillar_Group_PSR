@@ -22,6 +22,10 @@ public class PropertiesSetter implements IPropertiesSetter{
     }
 
 
+    /**
+     * Used to initialize properties values on startup of program by
+     * using handler.save(String key, String value).
+     */
     public void initialize() {
         handler.save("first.time", "true");
         handler.save("open.settings", "false");
