@@ -21,13 +21,12 @@ public class PropertiesSetter implements IPropertiesSetter{
         this.handler = new PropertiesHandler(propertiesFile);
     }
 
-    public void initialize() {
-        handler.save("first-time", "true");
-        handler.save("open-settings", "false");
-//        handler.save("first-time", "false");
-//        handler.save("first-time", "false");
-//        handler.save("first-time", "false");
-//        handler.save("first-time", "false");
 
+    public void initialize() {
+        handler.save("first.time", "true");
+        handler.save("open.settings", "false");
+        handler.save("db.host", "///");
+        handler.save("db.login", "postgres");
+        handler.save("db.password", "postgres");
     }
 }
