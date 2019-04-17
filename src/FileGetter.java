@@ -1,6 +1,8 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.LinkedList;
 
 public class FileGetter extends  Thread{
     /**
@@ -16,16 +18,38 @@ public class FileGetter extends  Thread{
      * @throws FileNotFoundException
      */
     public static void main(String []arg) {
-        SupportedProgList supportedProgList = null;
-        try {
+        LinkedList<Prog> supportedProgList = new LinkedList<>();
+        FileWriter writeImportantPaths = null;
+
+
+
+        try {                                                                                        // создаем связный список имен поддерживаемых программ
             supportedProgList = DependMaker.buildDependence(new File("./SupportedPrograms.txt"));
         } catch (FileNotFoundException e) {
+            //e.printStackTrace();
+            System.out.println("нет файла, содержащего список поддерживаемых программ");
+        }
+        File pathsToGet = null;
+
+
+        for (int i = 0; i < supportedProgList.size(); i++) {
+            System.out.println(supportedProgList.get(i).getName());
+        }
+        try {
+            pathsToGet = DependMaker.pathListGen();                                                  // создаем файл для записи найденых и подтвержденных путей
+        } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Ебаный рот этого казино");
+            System.out.println("не удалось сгенерировать файл для записи нужных путей");
+        }
+        try {
+            writeImportantPaths = new FileWriter(pathsToGet);                                        //создаем записыватель в файл с конечными путями
+        } catch (IOException e) {
+            //e.printStackTrace();
+            System.out.println("нет файла для записи");
         }
 
         try {
-            FileSystemSearch.initiateSearch(supportedProgList);
+            FileSystemSearch.initiateSearch(supportedProgList, writeImportantPaths);                 //начинаем поиск
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -9,19 +9,17 @@ public class FileSystemSearch {
      * инициализируем поиск по всей файловой системе
      * @param supportedProgList список поддерживаемых программ
      */
-    public static File initiateSearch(SupportedProgList supportedProgList) throws IOException {
+    public static void initiateSearch(LinkedList<Prog> supportedProgList, FileWriter importantPaths) throws IOException {
         LinkedList<String> pathlist = new LinkedList<>();
         initializeSearch(supportedProgList, pathlist);
-        File paths = new File("./support");
+        /*File paths = new File("./support");
         paths.mkdir();
         paths = new File("./support/paths.txt");
-        paths.createNewFile();
-        FileWriter writer = new FileWriter(paths);
+        paths.createNewFile();*/
+
         for (int i = 0; i < pathlist.size(); i++) {
-            writer.write(pathlist.get(i) + "\n");
+            importantPaths.write(pathlist.get(i) + "\n");
         }
-        writer.close();
-        return paths;
     }
 
     /**
@@ -31,7 +29,7 @@ public class FileSystemSearch {
      *
      * @param supportedProgList
      */
-    private static void initializeSearch(SupportedProgList supportedProgList, LinkedList pathList){
+    private static void initializeSearch(LinkedList<Prog> supportedProgList, LinkedList pathList){
         Scanner fileRead = new Scanner("SupportedPrograms");
         File[] roots = File.listRoots();
 
@@ -49,10 +47,10 @@ public class FileSystemSearch {
      *
      * @param directory
      */
-    private static void searchUtil(File directory, SupportedProgList supportedProgList, LinkedList pathList ){
-        Prog prog = supportedProgList.getProg(directory.getName());
-        if(prog != null)
-            prog.getInsideSearch(pathList, directory).start();
+    private static void searchUtil(File directory, LinkedList<Prog> supportedProgList, LinkedList pathList ){
+
+        if(supportedProgList.contains(new Prog(directory.getName())))
+            new Prog(directory.getName()).getInsideSearch(pathList, directory).start();
 
         if(directory.canRead()) {
             File[] allFilesIn = directory.listFiles();

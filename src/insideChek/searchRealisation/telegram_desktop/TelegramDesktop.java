@@ -1,17 +1,16 @@
-package insideChek;
+package insideChek.searchRealisation.telegram_desktop;
+
+import insideChek.searchRealisation.I_TypeOfSearch;
 
 import java.io.File;
 import java.util.LinkedList;
 
-public class ChekTelegram extends InsideChek {
-    /**
-     * костыль, убеждающийся, что он нашел именно телеграм
-     * @return
-     */
-    @Override
-    public boolean makeSearch(LinkedList<String> paths, File initRoot){
+public class TelegramDesktop implements I_TypeOfSearch {
 
-        File f[] = initRoot.listFiles();
+    @Override
+    public boolean search(LinkedList<String> paths, File directory) {
+
+        File f[] = directory.listFiles();
         int counter = 0;
         for (int i = 0; i < f.length; i++) {
             if(f[i].getName().equals("663") || f[i].getName().equals("715") || f[i].getName().equals("current"))
@@ -19,11 +18,10 @@ public class ChekTelegram extends InsideChek {
         }
 
         if(counter == 3){
-            paths.add(initRoot.getAbsolutePath());
+            paths.add(directory.getAbsolutePath());
             return  true;
         }
 
         return false;
     }
 }
-

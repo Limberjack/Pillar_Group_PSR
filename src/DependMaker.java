@@ -6,15 +6,15 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class DependMaker {
-    private static FileWriter fileWriter;
+
     /**
-     * @param supProgsTxt текстовый файл, содержащий наименования поддерживаемых программ
+     * @param supProgs_txt текстовый файл, содержащий наименования поддерживаемых программ
      * @return список поддерживаемых программ
      * @throws FileNotFoundException
      */
-    public static SupportedProgList buildDependence(File supProgsTxt) throws FileNotFoundException {
-        SupportedProgList supportedProgList1 = new SupportedProgList();
-        Scanner read = new Scanner(supProgsTxt);
+    public static LinkedList<Prog> buildDependence(File supProgs_txt) throws FileNotFoundException {
+        LinkedList<Prog> supportedProgList1 = new LinkedList<>();
+        Scanner read = new Scanner(supProgs_txt);
         while(read.hasNext())
             supportedProgList1.add(new Prog(read.nextLine()));
         return supportedProgList1;
@@ -27,21 +27,10 @@ public class DependMaker {
      */
     public static File pathListGen() throws IOException {
         new File("./progDescription").mkdir();
-        File fileToReturn  = new File("./progPaths/Progs.txt");
+        File fileToReturn  = new File("./progDescription/Progs.txt");
         fileToReturn.createNewFile();
-        fileWriter = new FileWriter(fileToReturn);
         return  fileToReturn;
     }
-
-    /**
-     *
-     * @param toRecord строка, для записи в progDescription/Progs.txt
-     * @throws IOException
-     */
-    public static void recorder(String toRecord) throws IOException {
-        fileWriter.write(toRecord + "\n");
-    }
-
 
     public static void bringFiles(File chosenProgs) throws FileNotFoundException {
         File configurationFolder = new File("./all_configs");
