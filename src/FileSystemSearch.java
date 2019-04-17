@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -9,17 +10,14 @@ public class FileSystemSearch {
      * инициализируем поиск по всей файловой системе
      * @param supportedProgList список поддерживаемых программ
      */
-    public static void initiateSearch(LinkedList<Prog> supportedProgList, FileWriter importantPaths) throws IOException {
-        LinkedList<String> pathlist = new LinkedList<>();
-        initializeSearch(supportedProgList, pathlist);
+    public static void initiateSearch(LinkedList<Prog> supportedProgList, LinkedList<String> pathList) throws IOException {
+
+        initializeSearch(supportedProgList, pathList);
         /*File paths = new File("./support");
         paths.mkdir();
         paths = new File("./support/paths.txt");
         paths.createNewFile();*/
 
-        for (int i = 0; i < pathlist.size(); i++) {
-            importantPaths.write(pathlist.get(i) + "\n");
-        }
     }
 
     /**
@@ -49,8 +47,11 @@ public class FileSystemSearch {
      */
     private static void searchUtil(File directory, LinkedList<Prog> supportedProgList, LinkedList pathList ){
 
-        if(supportedProgList.contains(new Prog(directory.getName())))
+        if(contains(supportedProgList, directory)) {
             new Prog(directory.getName()).getInsideSearch(pathList, directory).start();
+           // System.out.println(directory.getName());
+        }
+
 
         if(directory.canRead()) {
             File[] allFilesIn = directory.listFiles();
@@ -62,5 +63,15 @@ public class FileSystemSearch {
                     searchUtil(allFilesIn[i], supportedProgList, pathList);
             }
         }
+    }
+
+
+    private static boolean contains(LinkedList<Prog> supportedProgList, File directory){
+        Iterator<Prog> i = supportedProgList.descendingIterator();
+        while(i.hasNext())
+            if(i.next().getName().equals(directory.getName()))
+                return true;
+
+        return false;
     }
 }

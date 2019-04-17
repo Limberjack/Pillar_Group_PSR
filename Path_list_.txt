@@ -1,0 +1,3 @@
+@ telegram-desktop
+$ 123213
+# /snap/telegram-desktop/current/asdada

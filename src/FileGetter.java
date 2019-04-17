@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 public class FileGetter extends  Thread{
@@ -9,18 +10,13 @@ public class FileGetter extends  Thread{
      * 1)создаем список поддерживаемых программ
      * 2)запускаем полный обход по файловой системе в поисках этих программ
      * 3)спрашиваем пользователя, какие из найденых программ он хочет сохранить
-     * 4)идем к программам, указанным юзверем
-     * 5)копируем их файлы в свою папку
-     * 6)завершаемся, подчищая за собой
-     *
      *
      * @param
      * @throws FileNotFoundException
      */
-    public static void main(String []arg) {
+    public static String[] getPathsArray() {
         LinkedList<Prog> supportedProgList = new LinkedList<>();
-        FileWriter writeImportantPaths = null;
-
+        LinkedList<String> pathList = new LinkedList<String>();
 
 
         try {                                                                                        // создаем связный список имен поддерживаемых программ
@@ -29,35 +25,30 @@ public class FileGetter extends  Thread{
             //e.printStackTrace();
             System.out.println("нет файла, содержащего список поддерживаемых программ");
         }
-        File pathsToGet = null;
-
-
-        for (int i = 0; i < supportedProgList.size(); i++) {
-            System.out.println(supportedProgList.get(i).getName());
-        }
-        try {
-            pathsToGet = DependMaker.pathListGen();                                                  // создаем файл для записи найденых и подтвержденных путей
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("не удалось сгенерировать файл для записи нужных путей");
-        }
-        try {
-            writeImportantPaths = new FileWriter(pathsToGet);                                        //создаем записыватель в файл с конечными путями
-        } catch (IOException e) {
-            //e.printStackTrace();
-            System.out.println("нет файла для записи");
-        }
 
         try {
-            FileSystemSearch.initiateSearch(supportedProgList, writeImportantPaths);                 //начинаем поиск
+            FileSystemSearch.initiateSearch(supportedProgList, pathList);                 //начинаем поиск
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        return toArray(pathList);
+    }
+    private static String[] toArray(LinkedList<String> s){
+        String a[] = new String[s.size()];
+        Iterator<String> i= s.iterator();
+        for (int j = 0; i.hasNext(); j++) {
+            a[j] = i.next();
+        }
 
+        return a;
     }
 
-
-
+    public static void main(String[] args) {
+        String[] s = getPathsArray();
+        for (int i = 0; i < s.length; i++) {
+            System.out.println(s[i]);
+        }
+    }
 }
 
