@@ -29,7 +29,7 @@ public class PropertiesSetter implements IPropertiesSetter{
     public void initialize() {
         handler.save("first.time", "true");
         handler.save("open.settings", "false");
-        handler.save("db.host", "///");
+        handler.save("db.host", "jdbc:postgresql://localhost:5432/confix");
         handler.save("db.login", "postgres");
         handler.save("db.password", "postgres");
     }
