@@ -2,10 +2,17 @@ package database.modelsDB;
 
 import database.IProgramDB;
 
+/**
+ * General information about Program
+ */
 public class ProgramDB implements IProgramDB {
     private String programName;
     private String programVersion;
 
+    /**
+     * @param programName    name of the program
+     * @param programVersion version of the program
+     */
     public ProgramDB(String programName, String programVersion) {
         this.programName = programName;
         this.programVersion = programVersion;

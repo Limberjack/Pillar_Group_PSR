@@ -2,7 +2,6 @@ package database.repositories;
 
 import database.IConfigDB;
 import database.IProgramDB;
-import database.modelsDB.ProgramDB;
 
 import java.util.List;
 
@@ -11,5 +10,6 @@ import java.util.List;
  */
 public interface ConfigRepository extends CrudRepository<IProgramDB, IConfigDB> {
     List<IProgramDB> findAllPrograms();
+
     Integer getProgramId(IProgramDB programDB);
 }
