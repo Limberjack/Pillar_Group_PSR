@@ -1,26 +1,29 @@
-import database.DBrequest;
-import database.modelsDB.ConfigDB;
-import database.modelsDB.ConfigFileDB;
-import database.modelsDB.ProgramDB;
+import database.IConfigDB;
+import database.IConfigFileDB;
+import database.IProgramDB;
+import database.repositories.ConfigRepositoryJdbcImpl;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
 
 public class FileInsert {
     /**
-     *
+     * Переносит файлы конфигов определенной программы из места, где они хранятся, в место,
+     * где они должны находится.
      * @param program
      */
-    public static void copyFile(ProgramDB program) {
-        List<ConfigDB> configDBList = DBrequest.query(program);
-        List<ConfigFileDB> configFilesDB = configDBList.get(0).getConfigFiles();
-        configFilesDB.forEach(configFileDB -> copyFile(configFileDB.getPathBackup(), configFileDB.getPathProgram()));
+    public static void copyFile(IProgramDB program) throws SQLException {
+        List<IConfigDB> configDBList = ConfigRepositoryJdbcImpl.getInstance().find(program);
+        List<IConfigFileDB> configFilesDB = configDBList.get(0).getConfigFiles();
+        configFilesDB.forEach(configFileDB -> copyFile(configFileDB.getFilePathBackup(),
+                                                            configFileDB.getFilePathProgram()));
     }
+
 
     /**
      * Копирует файл originFilePath в destinationFolderPath.
