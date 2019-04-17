@@ -10,5 +10,6 @@ import java.util.List;
  * Interface's extension for configs
  */
 public interface ConfigRepository extends CrudRepository<IProgramDB, IConfigDB> {
-    List<ProgramDB> findAllPrograms();
+    List<IProgramDB> findAllPrograms();
+    Integer getProgramId(IProgramDB programDB);
 }

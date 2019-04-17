@@ -17,6 +17,24 @@ import java.util.*;
 public class ConfigRepositoryJdbcImpl implements ConfigRepository {
 
     private Connection connection;
+    private static ConfigRepositoryJdbcImpl configRepository;
+
+    public static ConfigRepositoryJdbcImpl getInstance() throws SQLException {
+        if (configRepository == null) {
+
+            String url = "jdbc:postgresql://localhost:5432/confix";
+            Properties props = new Properties();
+            props.setProperty("user", "postgres");
+            props.setProperty("password", "postgres");
+            Connection conn = DriverManager.getConnection(url, props);
+
+            configRepository = new ConfigRepositoryJdbcImpl(conn);
+            return configRepository;
+
+        } else {
+            return configRepository;
+        }
+    }
 
     /**
      * @param connection url and properties for data base connection
@@ -40,6 +58,10 @@ public class ConfigRepositoryJdbcImpl implements ConfigRepository {
             new ProgramDB(
                     rs.getString("name"),
                     rs.getString("version")
+            );
+    private static RowMapper<Integer> programIdRowMapper = rs ->
+            new Integer(
+                    rs.getInt("id")
             );
 
     /**
@@ -118,8 +140,6 @@ public class ConfigRepositoryJdbcImpl implements ConfigRepository {
                 e.printStackTrace();
             }
         }
-
-
     }
 
     /**
@@ -133,18 +153,18 @@ public class ConfigRepositoryJdbcImpl implements ConfigRepository {
 
         // The SQL Query
         String sqlQuery = "SELECT prco_store.name AS config_name, " +
-                            "file.name AS file_name, " +
-                            "file.path_program AS config_file_name, " +
-                            "file.path_backup AS config_file_path_backup " +
-                        "FROM (" +
-                            "SELECT * " +
-                            "FROM (" +
-                                    "SELECT pc_store.id_config " +
-                                    "FROM pc_store INNER JOIN program ON pc_store.id_program = program.id " +
-                                    "WHERE program.name = 'word' " +
-                                    "AND program.version = '12') AS prc_store " +
-                                    "INNER JOIN config ON prc_store.id_config = config.id) AS prco_store " +
-                                    "INNER JOIN file ON prco_store.id = file.id;";
+                "file.name AS file_name, " +
+                "file.path_program AS config_file_name, " +
+                "file.path_backup AS config_file_path_backup " +
+                "FROM (" +
+                "SELECT * " +
+                "FROM (" +
+                "SELECT pc_store.id_config " +
+                "FROM pc_store INNER JOIN program ON pc_store.id_program = program.id " +
+                "WHERE program.name = 'word' " +
+                "AND program.version = '12') AS prc_store " +
+                "INNER JOIN config ON prc_store.id_config = config.id) AS prco_store " +
+                "INNER JOIN file ON prco_store.id = file.id;";
 
         try (Statement stmt = connection.createStatement();
              // Do the SQL query and get the result
@@ -158,8 +178,7 @@ public class ConfigRepositoryJdbcImpl implements ConfigRepository {
                 configInfos.push(configRowMapper.mapRow(rs));
             }
 
-            //return convertConfigToInterface(configInfos); //fixme
-            return null; //fixme //remove
+            return convertConfigToInterface(configInfos);
 
         } catch (SQLException e) {
             throw new IllegalStateException(e);
@@ -217,7 +236,7 @@ public class ConfigRepositoryJdbcImpl implements ConfigRepository {
     }
 
     @Override
-    public List<ProgramDB> findAllPrograms() {
+    public List<IProgramDB> findAllPrograms() {
         // The SQL Query
         String sqlQuery = "SELECT * FROM program";
         try (Statement stmt = connection.createStatement();
@@ -226,12 +245,46 @@ public class ConfigRepositoryJdbcImpl implements ConfigRepository {
 
             Stack<ProgramDB> programs = new Stack<>();
             while (rs.next()) {
-                programs.add(programRowMapper.mapRow(rs));
+                programs.push(programRowMapper.mapRow(rs));
             }
 
-            return programs;
+            List<IProgramDB> programsI = new ArrayList<>();
+            while(!programs.isEmpty()){
+                programsI.add(programs.pop());
+            }
+            return programsI;
+
         } catch (SQLException e) {
             throw new IllegalStateException(e);
         }
     }
+
+    @Override
+    public Integer getProgramId(IProgramDB programDB) {
+        // The SQL Query
+        String sqlQuery = "SELECT id FROM program " +
+                "WHERE name=" + programDB.getProgramName() + "," +
+                " version=" + programDB.getProgramVersion() + ";";
+
+        try (Statement stmt = connection.createStatement();
+             // Do the SQL query and get the result
+             ResultSet rs = stmt.executeQuery(sqlQuery)) {
+
+            Stack<ProgramDB> programs = new Stack<>();
+            while (rs.next()) {
+                programs.push(programIdRowMapper.mapRow(rs));
+            }
+
+            List<IProgramDB> programsI = new ArrayList<>();
+            while(!programs.isEmpty()){
+                programsI.add(programs.pop());
+            }
+            return programsI;
+
+        } catch (SQLException e) {
+            throw new IllegalStateException(e);
+        }
+    }
+
+
 }

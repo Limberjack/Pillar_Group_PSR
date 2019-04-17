@@ -35,4 +35,13 @@ public class ConfigFileDB implements IConfigFileDB {
     public String getFilePathBackup() {
         return pathBackup;
     }
+
+    @Override
+    public String toString() {
+        return "ConfigFileDB{" +
+                "name='" + name + '\'' +
+                ", pathProgram='" + pathProgram + '\'' +
+                ", pathBackup='" + pathBackup + '\'' +
+                '}';
+    }
 }

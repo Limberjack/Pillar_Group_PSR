@@ -31,4 +31,12 @@ public class ConfigDB implements IConfigDB {
     public List<IConfigFileDB> getConfigFiles() {
         return ConfigFiles;
     }
+
+    @Override
+    public String toString() {
+        return "ConfigDB{" +
+                "name='" + name + '\'' +
+                ", ConfigFiles=" + ConfigFiles +
+                '}';
+    }
 }

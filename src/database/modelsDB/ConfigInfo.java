@@ -37,4 +37,14 @@ public class ConfigInfo {
     public String getPathBackup() {
         return pathBackup;
     }
+
+    @Override
+    public String toString() {
+        return "ConfigInfo{" +
+                "configName='" + configName + '\'' +
+                ", fileName='" + fileName + '\'' +
+                ", pathProgram='" + pathProgram + '\'' +
+                ", pathBackup='" + pathBackup + '\'' +
+                '}';
+    }
 }

@@ -18,4 +18,12 @@ public class ProgramDB implements IProgramDB {
     public String getProgramVersion() {
         return programVersion;
     }
+
+    @Override
+    public String toString() {
+        return "ProgramDB{" +
+                "programName='" + programName + '\'' +
+                ", programVersion='" + programVersion + '\'' +
+                '}';
+    }
 }
