@@ -28,11 +28,11 @@ public class MainPageController implements IMainPageController{
     public void openSettingsPage() throws IOException {
         if (checker.checkFirstTime()) {
             Runtime.getRuntime().exec(References.CMD_GET_APPS_NAMES_COMMAND);
-            ph.save("first-time", "false");
+            ph.save("first.time", "false");
             // TODO
             // Вставить код для FileGetter'a
         }
-        ph.save("open-settings", "true");
+        ph.save("open.settings", "true");
         Parent root = FXMLLoader.load(getClass().getResource(References.SETTINGS_PAGE_FXML_PATH));
         Scene scene = new Scene(root);
         Stage stage = new Stage(StageStyle.DECORATED);

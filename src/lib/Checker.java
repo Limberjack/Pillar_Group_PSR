@@ -11,7 +11,7 @@ public class Checker implements IChecker {
     @Override
     public boolean checkFirstTime() {
         this.ph = new PropertiesHandler(new File(References.CONFIX_SETTINGS_FILE_PATH));
-        String propertyName = "first-time";
+        String propertyName = "first.time";
         try {
             return ph.get(propertyName).equals("true");
         } catch (NullPointerException e) {
@@ -22,7 +22,7 @@ public class Checker implements IChecker {
     @Override
     public boolean checkOpenSettings() {
         this.ph = new PropertiesHandler(new File(References.CONFIX_SETTINGS_FILE_PATH));
-        String propertyName = "open-settings";
+        String propertyName = "open.settings";
         try {
             return ph.get(propertyName).equals("true");
         } catch (NullPointerException e) {
