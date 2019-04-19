@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Pillar_Group_PSR.iml" filepath="$PROJECT_DIR$/.idea/Pillar_Group_PSR.iml" />
       <module fileurl="file://$PROJECT_DIR$/fileGetter.iml" filepath="$PROJECT_DIR$/fileGetter.iml" />
     </modules>
   </component>
