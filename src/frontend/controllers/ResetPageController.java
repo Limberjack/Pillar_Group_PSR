@@ -1,4 +1,6 @@
-package controllers;
+package frontend.controllers;
+
+import frontend.controllers.IResetPageController;
 
 import java.net.URL;
 import java.util.ResourceBundle;

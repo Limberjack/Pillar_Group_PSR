@@ -1,4 +1,4 @@
-package lib;
+package frontend.lib;
 
 public class References {
 

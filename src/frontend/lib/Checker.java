@@ -1,6 +1,7 @@
-package lib;
+package frontend.lib;
 
 import java.io.File;
+import frontend.*;
 import java.lang.reflect.Method;
 import java.util.Properties;
 

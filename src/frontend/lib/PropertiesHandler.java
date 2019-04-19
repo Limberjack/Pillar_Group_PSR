@@ -1,4 +1,4 @@
-package lib;
+package frontend.lib;
 
 import java.io.*;
 import java.util.Properties;

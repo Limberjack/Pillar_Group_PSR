@@ -1,5 +1,6 @@
-package controllers;
+package frontend.controllers;
 
+import frontend.controllers.IResetPageFTController;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
