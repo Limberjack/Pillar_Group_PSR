@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -10,9 +11,9 @@ public class FileSystemSearch {
      * инициализируем поиск по всей файловой системе
      * @param supportedProgList список поддерживаемых программ
      */
-    public static void initiateSearch(LinkedList<Prog> supportedProgList, LinkedList<String> pathList) throws IOException {
+    public static void initiateSearch(LinkedList<Prog> supportedProgList, LinkedList<String> pathList, LinkedHashSet<String> progNames) throws IOException {
 
-        initializeSearch(supportedProgList, pathList);
+        initializeSearch(supportedProgList, pathList, progNames);
         /*File paths = new File("./support");
         paths.mkdir();
         paths = new File("./support/paths.txt");
@@ -27,14 +28,14 @@ public class FileSystemSearch {
      *
      * @param supportedProgList
      */
-    private static void initializeSearch(LinkedList<Prog> supportedProgList, LinkedList pathList){
+    private static void initializeSearch(LinkedList<Prog> supportedProgList, LinkedList pathList, LinkedHashSet<String> progNames){
         Scanner fileRead = new Scanner("SupportedPrograms");
         File[] roots = File.listRoots();
 
         while(fileRead.hasNext())
            supportedProgList.add(new Prog(fileRead.nextLine()));
         for (int i = 0; i < roots.length; i++) {
-            searchUtil(roots[i], supportedProgList, pathList);
+            searchUtil(roots[i], supportedProgList, pathList, progNames);
         }
 
     }
@@ -45,10 +46,10 @@ public class FileSystemSearch {
      *
      * @param directory
      */
-    private static void searchUtil(File directory, LinkedList<Prog> supportedProgList, LinkedList pathList ){
+    private static void searchUtil(File directory, LinkedList<Prog> supportedProgList, LinkedList pathList, LinkedHashSet<String> progNames){
 
         if(contains(supportedProgList, directory)) {
-            new Prog(directory.getName()).getInsideSearch(pathList, directory).start();
+            new Prog(directory.getName()).getInsideSearch(pathList, directory, progNames).start();
            // System.out.println(directory.getName());
         }
 
@@ -60,7 +61,7 @@ public class FileSystemSearch {
                         !(allFilesIn[i].getAbsolutePath().equals("/proc") ||
                                 allFilesIn[i].getAbsolutePath().equals("/sys")) //TODO убери костыль
                 )
-                    searchUtil(allFilesIn[i], supportedProgList, pathList);
+                    searchUtil(allFilesIn[i], supportedProgList, pathList, progNames);
             }
         }
     }

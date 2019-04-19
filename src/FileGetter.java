@@ -3,7 +3,9 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
+import java.util.Set;
 
 public class FileGetter extends  Thread{
     /**
@@ -17,7 +19,7 @@ public class FileGetter extends  Thread{
     public static String[] getPathsArray() {
         LinkedList<Prog> supportedProgList = new LinkedList<>();
         LinkedList<String> pathList = new LinkedList<String>();
-
+        LinkedHashSet<String> progNames = new LinkedHashSet<>();
 
         try {                                                                                        // создаем связный список имен поддерживаемых программ
             supportedProgList = DependMaker.buildDependence(new File("./SupportedPrograms.txt"));
@@ -27,14 +29,14 @@ public class FileGetter extends  Thread{
         }
 
         try {
-            FileSystemSearch.initiateSearch(supportedProgList, pathList);                 //начинаем поиск
+            FileSystemSearch.initiateSearch(supportedProgList, pathList, progNames);                 //начинаем поиск
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return toArray(pathList);
+        return toArray(progNames);
     }
-    private static String[] toArray(LinkedList<String> s){
+    private static String[] toArray(LinkedHashSet<String> s){
         String a[] = new String[s.size()];
         Iterator<String> i= s.iterator();
         for (int j = 0; i.hasNext(); j++) {
