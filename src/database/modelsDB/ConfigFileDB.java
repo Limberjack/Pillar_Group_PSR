@@ -1,11 +1,11 @@
 package database.modelsDB;
 
-import database.DBConfigFileable;
+import database.IConfigFileDB;
 
 /**
  * File of the config to save
  */
-public class ConfigFileDB implements DBConfigFileable {
+public class ConfigFileDB implements IConfigFileDB {
     private String name;
     private String pathProgram;
     private String pathBackup;
@@ -34,5 +34,14 @@ public class ConfigFileDB implements DBConfigFileable {
     @Override
     public String getFilePathBackup() {
         return pathBackup;
+    }
+
+    @Override
+    public String toString() {
+        return "ConfigFileDB{" +
+                "name='" + name + '\'' +
+                ", pathProgram='" + pathProgram + '\'' +
+                ", pathBackup='" + pathBackup + '\'' +
+                '}';
     }
 }

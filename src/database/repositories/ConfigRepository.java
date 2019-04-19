@@ -1,10 +1,15 @@
 package database.repositories;
 
-import database.DBConfigable;
-import database.DBProgramable;
+import database.IConfigDB;
+import database.IProgramDB;
+
+import java.util.List;
 
 /**
  * Interface's extension for configs
  */
-public interface ConfigRepository extends CrudRepository<DBProgramable, DBConfigable> {
+public interface ConfigRepository extends CrudRepository<IProgramDB, IConfigDB> {
+    List<IProgramDB> findAllPrograms();
+
+    Integer getProgramId(IProgramDB programDB);
 }
