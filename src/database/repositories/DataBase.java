@@ -37,7 +37,6 @@ public class DataBase implements ConfigRepository {
             Connection conn = DriverManager.getConnection(url, props);
 
             dataBase = new DataBase(conn);
-
         }
 
         return dataBase;
