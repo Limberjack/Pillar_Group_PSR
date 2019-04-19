@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="144.0" prefWidth="485.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.controllers.ResetPageFTController">
+   <children>
+      <Text layoutX="73.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Вы ещё не посещали страницу настроек.">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="11.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Пожалуйста, сделайте это перед тем, как заходить сюда">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Button fx:id="okButton" layoutX="194.0" layoutY="97.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="25.0" prefWidth="89.0" text="ОК" />
+   </children>
+</AnchorPane>
